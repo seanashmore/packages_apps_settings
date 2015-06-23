@@ -365,6 +365,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
+        //enable oem unlock by default
+        Utils.setOemUnlockEnabled(getActivity(), true);
+        updateAllOptions();
+
         mProcessStats = (PreferenceScreen) findPreference(PROCESS_STATS);
         mAllPrefs.add(mProcessStats);
     }
