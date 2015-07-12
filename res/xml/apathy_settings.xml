@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:title="@string/apathy_settings">
+
+    <SwitchPreference
+            android:key="show_battery_percentage"
+            android:title="@string/show_battery_percentage"
+            android:summary="@string/show_battery_percentage_summary"/>
+
+</PreferenceScreen>
