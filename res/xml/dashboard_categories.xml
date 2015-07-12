@@ -241,6 +241,14 @@
                 android:icon="@drawable/ic_settings_about"
                 />
 
+        <!-- Apathy Settings -->
+        <dashboard-tile
+                android:id="@+id/apathy_settings"
+                android:title="@string/apathy_settings"
+                android:fragment="com.android.settings.ApathySettings"
+                android:icon="@drawable/ic_settings_development"
+                />
+
     </dashboard-category>
 
 </dashboard-categories>
