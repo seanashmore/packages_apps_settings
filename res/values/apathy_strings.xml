@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Apathy Settings Customization Menu Items -->
+    <string name="apathy_settings">Apathy Settings</string>
+    <string name="show_battery_percentage">Display Battery Percentage</string>
+    <string name="show_battery_percentage_summary">Display the remaining battery percentage inside the battery icon.</string>
+
+</resources>
