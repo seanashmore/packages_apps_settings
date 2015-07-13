@@ -1,7 +1,6 @@
 package com.android.settings;
 
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -55,7 +54,9 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
         if(preference == mBatteryPercentagePreference){
             if(mBatteryPercentagePreference != null) {
                 Log.i(TAG, "batteryPercentagePreference clicked");
-                Settings.System.putInt(getContentResolver(), "status_bar_show_battery_percent", mBatteryPercentagePreference.isChecked() ? 1 : 0);
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENTAGE,
+                        mBatteryPercentagePreference.isChecked() ? 1 : 0);
                 Log.i(TAG, "Set batteryPercentagePreference to : " + mBatteryPercentagePreference.isChecked());
             }
         }else{
@@ -78,7 +79,9 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
         Log.i(TAG, "updateAllOptions()");
         if(mBatteryPercentagePreference != null) {
             Log.i(TAG,"batteryPercentagePreference is not null. Updating switch preference");
-            updateSwitchPreference(mBatteryPercentagePreference, Settings.System.getInt(getContentResolver(), "status_bar_show_battery_percent", 0) != 0);
+            updateSwitchPreference(mBatteryPercentagePreference,
+                    Settings.System.getInt(getContentResolver(),
+                            Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENTAGE , 0) != 0);
         }
     }
 
@@ -94,12 +97,13 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
         if(key == KEY_BATTERY_PERCENTAGE){
             try{
                 int value = Integer.parseInt((String) objValue);
-                Settings.System.putInt(getContentResolver(), "status_bar_show_battery_percent", value);
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENTAGE, value);
             }catch(NumberFormatException e){
-                Log.i(TAG,"Could not persist battery percentage setting");
+                Log.e(TAG,"Could not persist battery percentage display setting");
             }
+            return true;
         }
-
         return true;
     }
 }
