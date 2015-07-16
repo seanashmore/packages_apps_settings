@@ -6,4 +6,7 @@
     <string name="show_battery_percentage">Display Battery Percentage</string>
     <string name="show_battery_percentage_summary">Display the remaining battery percentage inside the battery icon.</string>
 
+    <string name="show_notification_count">Show Notification Count</string>
+    <string name="show_notification_count_summary">Display notification count on top of icon in status bar.</string>
+
 </resources>
