@@ -11,4 +11,9 @@
             android:title="@string/show_notification_count"
             android:summary="@string/show_notification_count_summary"/>
 
+    <SwitchPreference
+            android:key="show_dismiss_all_recents"
+            android:title="@string/show_dismiss_all_recents"
+            android:summary="@string/show_dismiss_all_recents_summary"/>
+
 </PreferenceScreen>

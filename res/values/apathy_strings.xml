@@ -9,4 +9,7 @@
     <string name="show_notification_count">Show Notification Count</string>
     <string name="show_notification_count_summary">Display notification count on top of icon in status bar.</string>
 
+    <string name="show_dismiss_all_recents">Show Dismiss-All Recents</string>
+    <string name="show_dismiss_all_recents_summary">Display a button to dismiss all recent tasks in \'Recents\' view</string>
+
 </resources>

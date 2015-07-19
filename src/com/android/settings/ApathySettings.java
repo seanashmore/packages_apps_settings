@@ -16,9 +16,11 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
 
     private final String KEY_BATTERY_PERCENTAGE = "show_battery_percentage";
     private final String KEY_NOTIFICATION_COUNT = "show_notification_count";
+    private final String KEY_DISMISS_ALL_RECENTS = "show_dismiss_all_recents";
 
     private SwitchPreference mBatteryPercentagePreference;
     private SwitchPreference mShowNotificationCountPreference;
+    private SwitchPreference mShowDismissAllRecentsPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -39,6 +41,14 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
             mShowNotificationCountPreference.setOnPreferenceChangeListener(this);
         }else{
             Log.i(TAG,"Something went wrong. Couldn't find notification count switch preference");
+        }
+
+        mShowDismissAllRecentsPreference = findAndInitSwitchPref(KEY_DISMISS_ALL_RECENTS);
+        if(mShowDismissAllRecentsPreference != null){
+            Log.i(TAG,"Found dismiss all recents preference OK");
+            mShowDismissAllRecentsPreference.setOnPreferenceChangeListener(this);
+        }else{
+            Log.i(TAG,"Something went wrong. Couldn't find dismiss all recents preference");
         }
 
         updateAllOptions();
@@ -76,6 +86,14 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
                         mShowNotificationCountPreference.isChecked() ? 1 : 0);
                 Log.i(TAG, "Set notificationCount to : " + mShowNotificationCountPreference.isChecked());
             }
+        }else if(preference == mShowDismissAllRecentsPreference) {
+            if(mShowDismissAllRecentsPreference != null) {
+                Log.i(TAG, "dismiss all recents clicked");
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.RECENTS_SHOW_DISMISS_ALL,
+                        mShowDismissAllRecentsPreference.isChecked() ? 1 : 0);
+                Log.i(TAG, "Set dismiss all recents to : " + mShowDismissAllRecentsPreference.isChecked());
+            }
         }else{
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -108,6 +126,13 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
                     Settings.System.getInt(getContentResolver(),
                             Settings.System.STATUS_BAR_SHOW_NOTIFICATION_COUNT , 0) != 0);
         }
+
+        if(mShowDismissAllRecentsPreference != null) {
+            Log.i(TAG,"showDismissAllRecents is not null. Updating switch preference");
+            updateSwitchPreference(mShowDismissAllRecentsPreference,
+                    Settings.System.getInt(getContentResolver(),
+                            Settings.System.RECENTS_SHOW_DISMISS_ALL , 0) != 0);
+        }
     }
 
     void updateSwitchPreference(SwitchPreference switchPreference, boolean value) {
@@ -133,6 +158,15 @@ public class ApathySettings extends SettingsPreferenceFragment implements Prefer
                 int value = Integer.parseInt((String) objValue);
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.STATUS_BAR_SHOW_NOTIFICATION_COUNT, value);
+            }catch(NumberFormatException e){
+                Log.e(TAG,"Could not persist notification count setting");
+            }
+            return true;
+        }else if(key == KEY_DISMISS_ALL_RECENTS){
+            try{
+                int value = Integer.parseInt((String) objValue);
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.RECENTS_SHOW_DISMISS_ALL, value);
             }catch(NumberFormatException e){
                 Log.e(TAG,"Could not persist notification count setting");
             }
